@@ -9,44 +9,37 @@ using namespace std;
 // User function Template for C++
 
 class Solution {
-  private:
-    bool safeState(int node, vector<int> adj[], int path[], int visit[], 
-    int mark[]){
-        visit[node] = 1;
-        path[node] = 1;
-        
-        for(auto it: adj[node]){
-            if(!visit[it]){
-                if(safeState(it, adj, path, visit, mark)){
-                    mark[node] = 0;
-                    return true;
-                }
-            }
-            else if(path[it]){
-                mark[node] = 0;
-                return true;
-            }
-        }
-        mark[node] = 1;
-        path[node] = 0;
-        return false;
-    }
   public:
     vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
         // code here
-        int path[V] = {0};
-        int visit[V] = {0};
-        int mark[V] = {0};
-        vector<int> safeNode;
-        for(int i = 0; i < V; i++){
-            if(!visit[i]){
-                safeState(i, adj, path, visit, mark);
+        int n=V;
+        vector<int>indegree(n, 0);
+        vector<vector<int>>rGraph(n, vector<int>());
+        for(int i=0; i<n; i++){
+            for(auto it:adj[i]){
+                rGraph[it].push_back(i);
+                indegree[i]++;
             }
         }
-        for(int i = 0; i < V; i++){
-            if(mark[i] == 1) safeNode.push_back(i);
+
+        vector<int>safeNodes;
+        queue<int>q;
+        for(int i=0; i<n; i++){
+            if(indegree[i]==0) q.push(i);
         }
-        return safeNode;
+
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            safeNodes.push_back(node);
+
+            for(auto it:rGraph[node]){
+                indegree[it]--;
+                if(indegree[it]==0) q.push(it);
+            }
+        }
+        sort(safeNodes.begin(), safeNodes.end());
+        return safeNodes;
     }
 };
 

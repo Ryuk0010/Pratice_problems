@@ -3,48 +3,73 @@
 using namespace std;
 
 // } Driver Code Ends
+
+
 class Solution
 {
-	public:
-	//Function to find sum of weights of edges of the Minimum Spanning Tree.
-    int spanningTree(int V, vector<vector<int>> adj[])
+    class DisjointSet
     {
-        // code here
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-        pq.push({0, 0});
-        
-        vector<int> vis(V, 0);
-        int sum=0;
-        
-        while(!pq.empty())
+    private:
+        vector<int> SIZE,PARENT;
+    public:
+        DisjointSet(int n)
         {
-            int distance=pq.top().first;
-            int node=pq.top().second;
-            pq.pop();
-            
-            if(vis[node])
+            SIZE.resize(n+1,1);
+            PARENT.resize(n+1);
+            for(int i=0; i<=n; i++)
+                PARENT[i] = i;
+        }
+        int findUParent(int NODE)
+        {
+            if(PARENT[NODE] == NODE) return NODE;
+            return PARENT[NODE] = findUParent(PARENT[NODE]);
+        }
+        void unionBySize(int NODE_1,int NODE_2)
+        {
+            int prnt_1 = findUParent(NODE_1);
+            int prnt_2 = findUParent(NODE_2);
+            if(prnt_1 == prnt_2) return;
+            if(SIZE[prnt_1] < SIZE[prnt_2])
             {
-                continue;
+                PARENT[prnt_1] = prnt_2;
+                SIZE[prnt_2] += SIZE[prnt_1];
             }
-            
-            vis[node]=1;
-            sum+=distance;
-            
-            for(auto i: adj[node])
+            else
             {
-                int adjNode=i[0];
-                int weight=i[1];
-                
-                if(!vis[adjNode])
-                {
-                    pq.push({weight, adjNode});
-                }
+                PARENT[prnt_2] = prnt_1;
+                SIZE[prnt_1] += SIZE[prnt_2];
             }
         }
+    };
+	public:
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        vector<pair<int,pair<int,int>>> edges;
+        for(int i=0; i<V; i++) 
+            for(auto it : adj[i])
+            {
+                int node = i;
+                int u = it[0];
+                int wt = it[1];
+                edges.push_back({wt,{node,u}});
+            }
         
-        return sum;
+        sort(edges.begin(),edges.end());
+        DisjointSet DS(V);
+        int mst_wt = 0;
+        for(auto it : edges)
+        {
+            int wt = it.first;
+            int u = it.second.first;
+            int v = it.second.second;
+            if(DS.findUParent(u) != DS.findUParent(v))
+            {
+                mst_wt += wt;
+                DS.unionBySize(u,v);
+            }
+        }
+        return mst_wt;
     }
-    
 };
 
 //{ Driver Code Starts.

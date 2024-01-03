@@ -9,7 +9,6 @@ public:
         vector<vector<int>> ans;
         ans = image;
         q.push({sr, sc});
-        // visit[sr][sc] = 1;
         ans[sr][sc] = color;
         int drow[] = {-1, 1, 0, 0};
         int dcol[] = {0, 0, -1, 1};

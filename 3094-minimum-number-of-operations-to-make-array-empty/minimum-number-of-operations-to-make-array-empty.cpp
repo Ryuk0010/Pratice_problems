@@ -22,9 +22,7 @@ public:
                 a -= 2;
                 op += a / 3;
                 op += 1;
-            }
-            
-            // op += (a + 2)/3;
+            }  
         }
         return op;
     

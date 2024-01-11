@@ -3,7 +3,6 @@ public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
       vector<int> adj[graph.size()];
       vector<int> deg(graph.size(), 0);
-      // reverse(graph, adj, deg);
       for(int i = 0; i < graph.size(); i++){
        
         for(auto it: graph[i]){

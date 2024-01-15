@@ -11,27 +11,23 @@ class Solution
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         // Code here
-        set<pair<int, int>> st;
-        st.insert({0,S});
+        queue<int> pq;
+        pq.push(S);
         vector<int> dist(V, 1e9);
         dist[S] = 0;
         
-        while(!st.empty()){
-            auto it = *(st.begin());
-            int node = it.second;
-            int dis = it.first;
-            st.erase(it);
+        while(!pq.empty()){
+            // int dis = pq.top().first;
+            int node = pq.front();
+            pq.pop();
             
             for(auto it: adj[node]){
                 int adjNode = it[0];
                 int edgeWeight = it[1];
                 
                 if(dist[node] + edgeWeight < dist[adjNode]){
-                    if(dist[adjNode] != 1e9){
-                        st.erase({dist[adjNode], adjNode});
-                    }
                     dist[adjNode] = dist[node] + edgeWeight;
-                    st.insert({dist[adjNode], adjNode});
+                    pq.push(adjNode);
                 }
             }
             

@@ -12,7 +12,6 @@ public:
         for(int i = 1; i < nums.size(); i++){
             sum += nums[i-1];
             ans[i] = abs(ans[i] - sum);
-            // st.pop();
         }
     return ans;
     }

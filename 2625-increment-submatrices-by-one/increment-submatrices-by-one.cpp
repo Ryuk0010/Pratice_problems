@@ -13,9 +13,12 @@ public:
             if(ec < n-1) mat[j][ec+1] -= 1;
           }
         }
+        int sum = 0;
         for(int i = 0; i < n; i++){
-          for(int j = 1; j < n; j++){
-            mat[i][j] += mat[i][j-1];
+          sum = 0;
+          for(int j = 0; j < n; j++){
+            sum += mat[i][j];
+            mat[i][j] = sum;
           }
         }
       return mat;

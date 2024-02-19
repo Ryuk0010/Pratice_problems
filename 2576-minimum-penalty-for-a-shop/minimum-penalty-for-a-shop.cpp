@@ -15,7 +15,6 @@ public:
           sum -= 1;
         }
       }
-      // if(sum < 0) return count;
       return ans;
     }
 };

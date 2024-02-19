@@ -11,9 +11,7 @@ public:
             ans = i + 1;
           }
         }
-        else{
-          sum -= 1;
-        }
+        else sum -= 1;
       }
       return ans;
     }

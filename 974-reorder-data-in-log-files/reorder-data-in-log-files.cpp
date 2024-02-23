@@ -22,7 +22,7 @@ public:
             }
         }
         sort(letter.begin(), letter.end(), comp);
-        res.insert(res.end(),letter.begin(),letter.end());
+        res.insert(res.begin(),letter.begin(),letter.end());
         res.insert(res.end(), digits.begin(), digits.end());
         return res;
     }

@@ -16,14 +16,8 @@ public:
         if(root1 == nullptr) return root2;
         if(root2 == nullptr) return root1;
         TreeNode* root = new TreeNode(root1->val + root2->val);
-        // if(root1->left != nullptr || root2->left != nullptr){
-            // root->val = (root1->val + root2->val);
-            root->left = merge(root1->left, root2->left);
-        // }
-        // if(root1->right != nullptr || root2->right != nullptr){
-            // root->val = (root1->val + root2->val);
-            root->right = merge(root1->right, root2->right);
-        // }
+        root->left = merge(root1->left, root2->left);
+        root->right = merge(root1->right, root2->right);
             
         return root;
     } 

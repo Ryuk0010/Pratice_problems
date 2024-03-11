@@ -16,7 +16,6 @@ public:
         if(root->left == nullptr && root->right == nullptr){
             cur += to_string(root->val);
             res.push_back(cur);
-            cur.erase();
             return;
         }
         cur += to_string(root->val);

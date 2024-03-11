@@ -11,16 +11,17 @@
  */
 class Solution {
 public:
-    int solve(TreeNode* root, int dir, int &ans){
+int ans = 0;
+    int solve(TreeNode* root, int dir){
       if(root->left == nullptr && root->right == nullptr && dir == 0) 
       return ans+=root->val;
-      if(root->left != nullptr)solve(root->left, 0, ans);
-      if(root->right != nullptr)solve(root->right, 1, ans);
+      if(root->left != nullptr)solve(root->left, 0);
+      if(root->right != nullptr)solve(root->right, 1);
       return ans;
     }
     int sumOfLeftLeaves(TreeNode* root) {
         int ans= 0;
         if(root->left == nullptr && root->right == nullptr) return 0;
-        return solve(root, 0, ans);
+        return solve(root, 0);
     }
 };

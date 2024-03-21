@@ -2,8 +2,8 @@ class Solution {
 
 bool isPossible(TreeNode* root, long long l, long long r){
     if(root == nullptr)  return true;
-    if(root->val < r and root->val > l)
-        return isPossible(root->left, l, root->val) and 
+    if(root->val < r && root->val > l)
+        return isPossible(root->left, l, root->val) & 
                                 isPossible(root->right, root->val, r);
     else return false;
 }

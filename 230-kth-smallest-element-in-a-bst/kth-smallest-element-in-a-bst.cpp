@@ -18,6 +18,7 @@ public:
       ind++;
       if(ind == k){
         ans = root->val;
+        return;
       }
       solve(root->right, k, ind, ans);
 

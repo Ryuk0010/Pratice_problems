@@ -24,7 +24,7 @@ public:
             string seq1 = seq;
             string seq2 = seq;
             seq1 += '(';
-            seq2.push_back(')');
+            seq2 += ')';
             solve(m-1, n, seq1, ans);
             solve(m, n-1, seq2, ans);
         }

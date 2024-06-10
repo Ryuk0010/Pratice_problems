@@ -5,7 +5,7 @@ public:
         sort(expected.begin(), expected.end());
         int ans= 0;
         for(int i = 0; i < heights.size(); i++){
-            ans += (heights[i] != expected[i]);
+            if(heights[i] != expected[i]) ans++;
         }
         return ans;
     }

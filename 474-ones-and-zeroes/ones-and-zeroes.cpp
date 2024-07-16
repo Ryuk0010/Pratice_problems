@@ -8,7 +8,7 @@ public:
         return dp[i][m][n] = fun(i-1, m, n, v);
     }
     int findMaxForm(vector<string>& strs, int m, int n) {
-        dp.resize(strs.size()+1, vector<vector<int>>(m+2, vector<int>(n+2, -1)));
+        dp.resize(strs.size()+1, vector<vector<int>>(m+1, vector<int>(n+1, -1)));
         vector<pair<int, int>> v;
         for(string x : strs){
             int cnt = count(x.begin(), x.end(), '0');

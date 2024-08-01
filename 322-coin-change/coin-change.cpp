@@ -12,7 +12,7 @@ public:
     }
     
     int coinChange(vector<int>& coins, int amount) {
-        vector<vector<int>>h(coins.size()+1,vector<int>(amount+1,-1));
+        vector<vector<int>>h(coins.size(),vector<int>(amount+1,-1));
         int ans = help(coins,amount,coins.size()-1,h);
         return (ans < INT_MAX-1)?ans:-1;
     }

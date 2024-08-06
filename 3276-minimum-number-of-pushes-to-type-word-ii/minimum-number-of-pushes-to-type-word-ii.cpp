@@ -11,8 +11,7 @@ public:
         int totalPress = 0;
         int press = 1;
         for (int i = 0; i < 26; i++) {
-            if(i>=8 && i%8 == 0) press++;
-            totalPress += freq[i]*press;
+            totalPress += freq[i]*(i / 8 + 1);
         }
         
         return totalPress;

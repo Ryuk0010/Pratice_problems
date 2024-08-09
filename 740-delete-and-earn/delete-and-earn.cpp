@@ -14,7 +14,12 @@ public:
             freq[num] += num;
         }
         // for(int it: freq) cout << it <<" ";
-        vector<int> dp(maxVal + 1, -1);
-        return solve(maxVal, nums, dp, freq);
+        vector<int> dp(maxVal + 1, 0);
+        // return solve(maxVal, nums, dp, freq);
+        dp[1] = freq[1];
+        for (int i = 2; i <= maxVal; i++) {
+            dp[i] = max(dp[i-1], dp[i-2] + freq[i]);
+        }
+        return dp[maxVal];
     }
 };

@@ -8,9 +8,6 @@ public:
                 result[i] += result[j-1]*result[i-j];
             }
         }
-         for(int j=0;j<=n;j++){
-          cout << result[j] <<" ";
-         }
         return result[n]; 
     }
 };

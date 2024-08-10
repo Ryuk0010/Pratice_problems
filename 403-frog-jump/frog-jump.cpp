@@ -4,7 +4,6 @@ public:
         unordered_map<int, unordered_set<int>> mp;
 
         mp[stones[0] + 1] = {1};
-        // cout << stones.back();
         for(int i = 1; i < stones.size(); ++i){
             int stone = stones[i];
 
@@ -14,7 +13,6 @@ public:
                 mp[stone + it - 1].insert(it - 1);
             }
         }
-        // cout << mp[stones.back()].size();
-        return !mp[stones.back()].empty();
+        return mp[stones.back()].size();
     }
 };

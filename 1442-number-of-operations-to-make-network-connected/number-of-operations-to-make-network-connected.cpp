@@ -11,7 +11,7 @@ public:
         return cnt;
     }
     int makeConnected(int n, vector<vector<int>>& connections) {
-        int cCnt = 0;
+        int cntAllConn = 0;
         int m = connections.size();
         vector<vector<int>> adj(n);
         for(int i = 0; i < m; i++){
@@ -19,26 +19,17 @@ public:
             int b = connections[i][1];
             adj[a].push_back(b);
             adj[b].push_back(a);
-            cCnt++;
+            cntAllConn++;
         }
-        if(cCnt < n-1) return -1;
-        // for(int i = 0; i < n; i++){
-        //     cout << i << "->";
-        //     for(auto it: adj[i]){
-        //         cout << it <<" ";
-        //     }
-        //     cout << endl;
-        // }
-        // return 0;
-        int cnt = 0;
+        if(cntAllConn < n-1) return -1;
+        int cntConn = 0;
         int a = 0;
         vector<int> vis(n, 0);
         for(int i = 0; i < n; i++){
-            if(!vis[i]) cnt = dfs(i, vis, adj, a);
+            if(!vis[i]) cntConn = dfs(i, vis, adj, a);
         } 
-        int extraConnection = abs(cCnt - cnt);
-        int connNodes = cnt+1;
-        int remNodes = n - connNodes;
+        int extraConnection = abs(cntAllConn - cntConn);
+        int remNodes = n - (cntConn + 1);
         if(remNodes <= extraConnection) return remNodes;
         return -1;
         

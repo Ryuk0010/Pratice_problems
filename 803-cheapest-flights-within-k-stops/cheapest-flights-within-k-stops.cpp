@@ -1,35 +1,33 @@
 class Solution {
-    int dp[101][101];
-    const int inf = 1e8;
-private: 
-
-    int dfs(int k, int node, int dst, vector<int> adj[], vector<vector<int>>& cost){
-        if(k < 0) return inf;
-        if(node == dst) return 0;
-
-        if(dp[node][k] != -1) return dp[node][k];
-
-        int ans = inf;
-        for(auto it: adj[node]){
-            ans = min(ans, cost[node][it] + dfs(k-1, it, dst, adj, cost));
-        } 
-        return dp[node][k] = ans;
-
-
-    }
 public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
-        memset(dp, -1, sizeof dp);
-        vector<int> adj[n];
-        vector<vector<int>> cost(n, vector<int>(n));
-        for(int i = 0; i < flights.size(); i++){
-            int src = flights[i][0];
-            int dest = flights[i][1];
-            int cst = flights[i][2];
-            adj[src].push_back(dest);
-            cost[src][dest] = cst;
+        vector<vector<pair<int,int>>>adj(n);
+        for(auto it:flights){
+           adj[it[0]].push_back({it[1],it[2]});
+
         }
-        int ans = dfs(k + 1, src, dst, adj, cost);
-        return ans == inf ? -1 : ans;
+        vector<int>price(n,INT_MAX);
+        price[src]=0;
+        queue<pair<int,pair<int,int>>>q;
+        q.push({0,{src,0}});
+        while(!q.empty()){
+            int stop=q.front().first;
+            int node=q.front().second.first;
+            int cost=q.front().second.second;
+            q.pop();
+
+            if(stop > k){
+               continue; 
+            }
+
+            for(auto it: adj[node]){
+             
+              if(stop <= k && cost + it.second < price[it.first]){
+                 price[it.first] = cost + it.second;
+                  q.push({stop + 1, {it.first, cost + it.second}});
+              }
+            }
+        }
+        return price[dst] == INT_MAX ? -1: price[dst];
     }
 };

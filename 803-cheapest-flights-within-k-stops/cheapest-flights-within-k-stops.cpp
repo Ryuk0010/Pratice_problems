@@ -1,38 +1,35 @@
 class Solution {
-    const int inf = 1e8;
     int dp[101][101];
+    const int inf = 1e8;
+private: 
 
-public:
-    int dfs(int node, int k, int dest, vector<vector<int>> &cost, vector<int> adj[])
-    {
-        if (k < 0)
-            return inf;
+    int dfs(int k, int node, int dst, vector<int> adj[], vector<vector<int>>& cost){
+        if(k < 0) return inf;
+        if(node == dst) return 0;
 
-        if (node == dest)
-            return 0;
-
-        if (dp[node][k] != -1)
-            return dp[node][k];
+        if(dp[node][k] != -1) return dp[node][k];
 
         int ans = inf;
-        for (auto i : adj[node])
-            ans = min(ans, cost[node][i] + dfs(i, k - 1, dest, cost, adj));
-
+        for(auto it: adj[node]){
+            ans = min(ans, cost[node][it] + dfs(k-1, it, dst, adj, cost));
+        } 
         return dp[node][k] = ans;
+
+
     }
-    int findCheapestPrice(int n, vector<vector<int>> &flights, int src, int dst, int k)
-    {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
         memset(dp, -1, sizeof dp);
-
-        vector<vector<int>> cost(n, vector<int>(n));
         vector<int> adj[n];
-        for (auto e : flights)
-        {
-            adj[e[0]].push_back(e[1]);
-            cost[e[0]][e[1]] = e[2];
+        vector<vector<int>> cost(n, vector<int>(n));
+        for(int i = 0; i < flights.size(); i++){
+            int src = flights[i][0];
+            int dest = flights[i][1];
+            int cst = flights[i][2];
+            adj[src].push_back(dest);
+            cost[src][dest] = cst;
         }
-
-        int ans = dfs(src, k + 1, dst, cost, adj);
+        int ans = dfs(k + 1, src, dst, adj, cost);
         return ans == inf ? -1 : ans;
     }
 };

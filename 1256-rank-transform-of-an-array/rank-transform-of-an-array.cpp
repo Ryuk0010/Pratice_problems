@@ -9,7 +9,7 @@ public:
             if(!mpp.count(copy[i]))mpp[copy[i]] = ++ind;
         }
         for(int i = 0; i < arr.size(); i++){
-            if(mpp.count(arr[i])) copy[i] = mpp.find(arr[i])->second;
+            copy[i] = mpp.find(arr[i])->second;
         }
         return copy;
     }

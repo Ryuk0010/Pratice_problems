@@ -6,7 +6,7 @@ public:
         for(auto it: s){
             if(it == '(') cnt++;
             else{
-                cnt > 0 ? cnt-- : extra++;
+                cnt <= 0 ? extra++ : cnt--;
             }
         }
         return cnt + extra;

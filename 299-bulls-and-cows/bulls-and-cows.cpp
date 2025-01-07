@@ -18,10 +18,11 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            if(secret.find(guess[i])!=-1 && guess[i]!=-1)
+            int ind = secret.find(guess[i]);
+            if(ind !=-1 && guess[i]!=-1)
             {
                 countc++;
-                secret[secret.find(guess[i])]=-1;
+                secret[ind]=-1;
             }
         }
          ans=to_string(countb)+"A"+to_string(countc)+"B";

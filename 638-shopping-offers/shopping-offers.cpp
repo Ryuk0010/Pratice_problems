@@ -1,34 +1,30 @@
 class Solution {
 public:
-map<vector<int>, int> mp;
-    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& need) {
-        if(mp.count(need) != 0)return mp[need];
-        int ans = 0;
-
-        int n = price.size();
-        for(int i = 0; i < n; i++){
-            ans += price[i]*need[i];
-        }
-        for(int i = 0; i < special.size(); i++){
-            bool isValid = 1;
-            for(int j = 0; j < n; j++){
-                if(need[j] < special[i][j]){ 
-                    isValid = 0;
-                    break;
-                }
+    int solve(int idx, vector<int>& price, vector<vector<int>>& special, vector<int>& needs){
+        if(idx == special.size()){
+            int ans = 0;
+            for(int i = 0; i < needs.size(); i++){
+                ans += price[i]*needs[i];
             }
-            if(isValid){
-                for(int j = 0; j < n; j++){
-                    need[j] -= special[i][j];
-                }
-                int ans2 = special[i].back() + shoppingOffers(price, special, need);
-                ans = min(ans, ans2);
-                
-                for(int j = 0; j < n; j++){
-                    need[j] += special[i][j];
-                }
-            }
+            return ans;
         }
-        return mp[need] = ans;
+        int flag = 1;
+        for(int i=0; i<price.size(); i++){
+            if(special[idx][i] > needs[i]) flag = 0;
+        }
+        if(flag){
+            for(int i=0; i<price.size(); i++){
+                needs[i] -= special[idx][i];
+            }
+            int money = special[idx][price.size()] + solve(idx, price, special, needs);
+            for(int i=0; i<price.size(); i++){
+                needs[i] += special[idx][i];
+            }
+            return min(money, solve(idx+1, price, special, needs));
+        }
+        return solve(idx+1, price, special, needs);
+    }
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+        return solve(0, price, special, needs);
     }
 };

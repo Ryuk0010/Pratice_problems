@@ -1,6 +1,6 @@
 #define ll long long
 
-ll dp[50][50][2];
+ll dp[40][40][2];
 
 ll find(int pos, int stat, int jump, int back, vector<ll> &exp, int k)
 {

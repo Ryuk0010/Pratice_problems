@@ -4,9 +4,10 @@ public:
         int n = grid.size();
         queue<pair<int, pair<int, int>>> q;
         vector<vector<int>> vis(n, vector<int>(n, 0));
+
         vector<int> x = {1, 1, 1, -1, -1, -1, 0, 0};
         vector<int> y = {1, 0, -1, 1, 0, -1, -1, 1};
-        int ans = -1;
+
         if(grid[0][0] == 1) return -1;
         q.push({1, {0, 0}});
         vis[0][0] = 1;
@@ -25,6 +26,6 @@ public:
                 }
             }
         }
-        return ans;
+        return -1;
     }
 };

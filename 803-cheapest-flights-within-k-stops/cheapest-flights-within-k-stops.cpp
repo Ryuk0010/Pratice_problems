@@ -8,12 +8,12 @@ public:
         }
         vector<int>price(n,INT_MAX);
         price[src]=0;
-        queue<pair<int,pair<int,int>>>q;
+        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> q;
         q.push({0,{src,0}});
         while(!q.empty()){
-            int stop=q.front().first;
-            int node=q.front().second.first;
-            int cost=q.front().second.second;
+            int stop=q.top().first;
+            int node=q.top().second.first;
+            int cost=q.top().second.second;
             q.pop();
 
             if(stop > k){

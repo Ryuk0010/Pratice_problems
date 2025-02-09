@@ -4,18 +4,18 @@ public:
         int n = heights.size(); 
         int m = heights[0].size(); 
         vector<vector<int>> dist(n, vector<int>(m, INT_MAX));
-        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> pq;
+        queue<pair<int, pair<int, int>>> pq;
         pq.push({0, {0, 0}});
         dist[0][0] = 0;
         int x[] = {1, -1, 0, 0};
         int y[] = {0, 0, -1, 1};
         int ans = INT_MAX;
         while(!pq.empty()){
-            int preveff = pq.top().first;
-            int row = pq.top().second.first;
-            int col = pq.top().second.second;
+            int preveff = pq.front().first;
+            int row = pq.front().second.first;
+            int col = pq.front().second.second;
             pq.pop();
-            if(row == n-1 && col == m-1) return preveff;
+            // if(row == n-1 && col == m-1) return preveff;
             for(int i = 0; i < 4; i++){
                 int nrow = row + x[i];
                 int ncol = col + y[i];
@@ -28,6 +28,6 @@ public:
                 }
             }
         }
-        return -1;
+        return dist[n-1][m-1];
     }
 };

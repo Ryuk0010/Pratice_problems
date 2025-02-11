@@ -30,7 +30,7 @@ int countPaths(int n, vector<vector<int>>& roads) {
         long long node = pq.top().second;
         pq.pop();
 
-        // if (cost > dist[node]) continue;  
+        if (cost > dist[node]) continue;  
 
         for (auto x : adj[node]) {
             long long adjNode = x.first;

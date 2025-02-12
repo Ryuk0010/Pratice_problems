@@ -1,21 +1,19 @@
 class Solution {
 public:
-    bool canFinish(int numCourses, vector<vector<int>> &prerequisites){
-      vector<int> adj[numCourses];
-      for (auto it : prerequisites){
-          adj[it[1]].push_back(it[0]);
-      }
-      int V = numCourses;
-        vector<int> indegree(V, 0);
-        for (int i = 0; i < V; i++){
-          for (int adjNode : adj[i]){
-            indegree[adjNode]++; // calculating indegree of every node
-          }
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adj(numCourses);
+        vector<int> indegree(numCourses, 0);
+        for(auto it: prerequisites){
+            adj[it[1]].push_back(it[0]);
         }
+          for (auto adjNode : prerequisites){
+            indegree[adjNode[0]]++; 
+          }
+        
         queue<int> q;
-        for (int i = 0; i < V; i++){
+        for (int i = 0; i < numCourses; i++){
           if (indegree[i] == 0){
-            q.push(i); // pushing starting sources
+            q.push(i); 
           }
         }
 
@@ -31,10 +29,9 @@ public:
             }
           }
         }
-        if (topo.size() == V){
+        if (topo.size() == numCourses){
           return true;
         }
-
-      return false;
+        return false;
     }
 };

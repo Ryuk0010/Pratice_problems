@@ -8,7 +8,7 @@ public:
     
     void add(int num) {
         if(num == 0){
-            ans.clear();
+            ans = vector<int> ();
             prod = 1;
         }
         else{

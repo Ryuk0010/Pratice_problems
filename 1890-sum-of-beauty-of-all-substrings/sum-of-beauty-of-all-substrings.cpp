@@ -1,26 +1,30 @@
-class Solution {
+class Solution
+{
 public:
-    int beautySum(string s) {
-        int totalBeauty = 0;
-        
-        for (int i = 0; i < s.size(); i++) {
-            map<char, int> mpp;
-            for (int j = i; j < s.size(); j++) {
-                mpp[s[j]]++;
-                if (j - i >= 2) {
-                    int maxfreq = INT_MIN;
-                    int minfreq = INT_MAX;
-                    
-                    for (auto it : mpp) {
-                        maxfreq = max(maxfreq, it.second);
-                        minfreq = min(minfreq, it.second);
+    int beautySum(string s)
+    {
+        int n = s.length();
+        int total = 0;
+
+
+        for (int i = 0; i < n; i++)
+        {
+            vector<int> v(26, 0);
+            for (int j = i; j < n; j++)
+            {
+                v[s[j] - 'a']++;
+                int maxfreq =0, minfreq = INT_MAX;
+                for (int f : v)
+                {
+                    if (f> 0)
+                    {
+                        maxfreq = max(maxfreq, f);
+                        minfreq = min(minfreq, f);
                     }
-                    
-                    totalBeauty += (maxfreq - minfreq);
                 }
+                total +=( maxfreq - minfreq);
             }
         }
-        
-        return totalBeauty;
+        return total;
     }
 };

@@ -1,19 +1,18 @@
 class Solution {
-public:
-    vector<vector<int>> fn(vector<int>& nums, int i){
-        if(i == nums.size()) return {{}};
-        vector<vector<int>> ans;
-        vector<vector<int>> t = fn(nums, i+1);
-        for(auto it: t){
-            ans.push_back(it);
+    public:
+    vector<vector<int>> ans;
+    void subsetsHelper(vector<int>& nums, int i, vector<int> subset) {
+        if(i == nums.size()) {  
+            ans.push_back(subset);
+            return;
         }
-        for(auto it: t){
-            it.push_back(nums[i]);
-            ans.push_back(it);
-        }
-        return ans;
+        subsetsHelper(nums, i+1, subset);
+        subset.push_back(nums[i]);
+        subsetsHelper(nums, i+1, subset);
     }
     vector<vector<int>> subsets(vector<int>& nums) {
-        return fn(nums, 0);
+        vector<int> subset;
+        subsetsHelper(nums, 0, subset);
+        return ans;
     }
 };

@@ -5,12 +5,11 @@ public:
         if(j < 0) return i+1;
         if(dp[i][j] != -1) return dp[i][j];
         int ans = INT_MAX;
-        if(word1[i] == word2[j]) ans = solve(word1, word2, i-1, j-1, dp);
+        if(word1[i] == word2[j]) return solve(word1, word2, i-1, j-1, dp);
         int insert = 1 + solve(word1, word2, i, j - 1, dp);
         int del = 1 + solve(word1, word2, i - 1, j, dp);
         int replace = 1 + solve(word1, word2, i - 1, j - 1, dp);
-        ans = min(ans, min(insert, min(del, replace)));
-        return dp[i][j] = ans;
+        return dp[i][j] =  min(insert, min(del, replace));
     }
     int minDistance(string word1, string word2) {
         int i = word1.length();

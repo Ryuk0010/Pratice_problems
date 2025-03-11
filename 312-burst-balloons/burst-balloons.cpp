@@ -14,7 +14,7 @@ public:
     int maxCoins(vector<int>& nums) {
         nums.push_back(1);
         nums.insert(nums.begin(), 1);
-        vector<vector<int>> dp(nums.size()+1, vector<int>(nums.size()+1, -1));
+        vector<vector<int>> dp(nums.size(), vector<int>(nums.size(), -1));
         return solve(1, nums.size()-2, nums, dp);
     }
 };

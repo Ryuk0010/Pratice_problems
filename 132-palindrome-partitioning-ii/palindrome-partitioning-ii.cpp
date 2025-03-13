@@ -7,7 +7,9 @@ int dp1[2000][2000];
 
         if(dp1[i][j] != -1)
             return dp1[i][j];
-        return dp1[i][j] = (s[i] == s[j]) && isPal(s, i+1, j-1);
+            if(s[i] == s[j]) dp1[i][j] = isPal(s, i+1, j-1);
+            else return false;
+        return dp1[i][j];
     }
     int minCutHelp(string &s, int i) {
         if(i == s.length() - 1) 

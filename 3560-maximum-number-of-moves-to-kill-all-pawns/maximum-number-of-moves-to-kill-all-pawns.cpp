@@ -1,7 +1,8 @@
 class Solution {
 public:
     vector<vector<int>> directions = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}};
-    void BFS(int x, int y, int index, vector<vector<int>>& minDist, vector<vector<int>>& pos) {
+    void BFS(int x, int y, int idx, vector<vector<int>>& minDist, vector<vector<int>>& ps){
+
         vector<vector<int>> t(50, vector<int>(50, -1));
         queue<pair<int, int>> que;
         que.push({x, y});
@@ -21,12 +22,10 @@ public:
                 }
             }
         }
-
-        for(int i = 0; i < pos.size(); i++) {
-            int x_ = pos[i][0];
-            int y_ = pos[i][1];
-
-            minDist[index][i] = t[x_][y_];
+        for(int i = 0; i < ps.size(); i++){
+            int x_ = ps[i][0];
+            int y_ = ps[i][1];
+            minDist[idx][i] = t[x_][y_];
         }
     }
 

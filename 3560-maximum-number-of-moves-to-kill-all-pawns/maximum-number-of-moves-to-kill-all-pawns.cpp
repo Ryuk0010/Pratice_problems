@@ -59,7 +59,7 @@ public:
 
         vector<vector<int>> pos;
         pos.push_back({kx, ky});
-        for(auto &vec : positions) {
+        for(auto vec : positions) {
             pos.push_back({vec[0], vec[1]});
         }
 

@@ -3,29 +3,29 @@ public:
     vector<vector<int>> directions = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}};
     void BFS(int x, int y, int idx, vector<vector<int>>& minDist, vector<vector<int>>& ps){
 
-        vector<vector<int>> t(50, vector<int>(50, -1));
+        vector<vector<int>> vis(50, vector<int>(50, -1));
         queue<pair<int, int>> que;
         que.push({x, y});
-        t[x][y] = 0;
+        vis[x][y] = 0;
 
-        while(!que.empty()) {
+        while(!que.empty()){
             auto[currX, currY] = que.front();
             que.pop();
 
-            for(auto &dir : directions) {
+            for(auto &dir: directions){
                 int newX = currX + dir[0];
                 int newY = currY + dir[1];
-
-                if(newX >= 0 && newX < 50 && newY >= 0 && newY < 50 && t[newX][newY] == -1) {
-                    t[newX][newY] = t[currX][currY] + 1;
+                
+                if(newX >= 0 && newX < 50 && newY >= 0 && newY < 50 && vis[newX][newY] == -1){
                     que.push({newX, newY});
+                    vis[newX][newY] = 1 + vis[currX][currY];
                 }
             }
         }
         for(int i = 0; i < ps.size(); i++){
             int x_ = ps[i][0];
             int y_ = ps[i][1];
-            minDist[idx][i] = t[x_][y_];
+            minDist[idx][i] = vis[x_][y_];
         }
     }
 

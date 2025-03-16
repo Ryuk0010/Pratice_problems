@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<vector<int>> directions = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}};
-
     void BFS(int x, int y, int index, vector<vector<int>>& minDist, vector<vector<int>>& pos) {
         vector<vector<int>> t(50, vector<int>(50, -1));
         queue<pair<int, int>> que;
@@ -31,15 +30,12 @@ public:
         }
     }
 
-    int solve(vector<vector<int>>& minDist, int idx, int mask, int n, bool Alice, int dp[51][1<<15]) {
+    int solve(vector<vector<int>>& minDist, int idx, int mask, int n, bool Alice,int dp[51][1 << 15]) {
         if(mask == 0) {
-            return 0; //no more moves/steps required
+            return 0; 
         }
 
-        if(dp[idx][mask] != -1) {
-            return dp[idx][mask];
-        }
-
+        if(dp[idx][mask] != -1) return dp[idx][mask];
         int result = (Alice == true) ? -1 : 1e9;
 
         for(int i = 1; i < n; i++) {
@@ -47,7 +43,7 @@ public:
                 int moves = minDist[idx][i];
 
                 if(Alice == true) {
-                    result = max(result, moves + solve(minDist, i, mask ^ (1 << (i-1)), n, !Alice, dp));
+                    result = max(result, moves + solve(minDist, i, mask ^ (1 << (i-1)), n, !Alice ,dp));
                 } else {
                     result = min(result, moves + solve(minDist, i, mask ^ (1 << (i-1)), n, !Alice, dp));
                 }
@@ -66,7 +62,7 @@ public:
             pos.push_back({vec[0], vec[1]});
         }
 
-        //minDist[][]
+        
         vector<vector<int>> minDist(n+1, vector<int>(n+1, 0));
 
         for(int i = 0; i < pos.size(); i++) {
@@ -76,8 +72,7 @@ public:
         }
 
 
-        //call solve
-        //0th index par knight hai mera in pos array
+        
         bool Alice = true;
         int dp[51][1 << 15];
         memset(dp, -1, sizeof(dp));

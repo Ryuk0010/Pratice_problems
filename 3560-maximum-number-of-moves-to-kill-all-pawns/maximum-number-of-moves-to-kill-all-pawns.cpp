@@ -4,21 +4,23 @@ public:
     void BFS(int x, int y, int idx, vector<vector<int>>& minDist, vector<vector<int>>& ps){
 
         vector<vector<int>> vis(50, vector<int>(50, -1));
-        queue<pair<int, int>> que;
-        que.push({x, y});
+        queue<pair<int, int>> q;
+        q.push({x, y});
         vis[x][y] = 0;
 
-        while(!que.empty()){
-            auto[currX, currY] = que.front();
-            que.pop();
+        while(!q.empty()){
+            auto it = q.front();
+            q.pop();
+            int currentX = it.first;
+            int currentY = it.second;
 
             for(auto &dir: directions){
-                int newX = currX + dir[0];
-                int newY = currY + dir[1];
+                int newX = currentX + dir[0];
+                int newY = currentY + dir[1];
                 
                 if(newX >= 0 && newX < 50 && newY >= 0 && newY < 50 && vis[newX][newY] == -1){
-                    que.push({newX, newY});
-                    vis[newX][newY] = 1 + vis[currX][currY];
+                    q.push({newX, newY});
+                    vis[newX][newY] = 1 + vis[currentX][currentY];
                 }
             }
         }

@@ -17,18 +17,15 @@ public:
         vector<int> ans;
         TreeNode* curr = root;
 
-        while(1){
-            if(curr != nullptr){
+        while(curr != NULL || !st.empty()){
+            while(curr){
                 st.push(curr);
                 curr = curr->left;
             }
-            else{
-                if(st.empty())break;
-                curr = st.top();
-                ans.push_back(curr->val);
-                st.pop();
-                curr = curr -> right;
-            }
+            curr = st.top();
+            st.pop();
+            ans.push_back(curr->val);
+            curr = curr->right;
         }
         return ans;
     }

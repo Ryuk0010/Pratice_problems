@@ -11,19 +11,22 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root, vector<int> &ans, int line){
-        if(root == nullptr) return;
-        ans[line] = root->val;
-        solve(root->left, ans, line+1);
-        solve(root->right, ans, line+1);
-    }
     vector<int> rightSideView(TreeNode* root) {
-        vector<int> ans(101, -1);
-        solve(root, ans, 0);
-        vector<int> finalAns;
-        for(int i = 0; i <= 100; i++){
-          if(ans[i] != -1) finalAns.push_back(ans[i]);
+        if(root == nullptr) return {};
+        vector<int> ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int size = q.size();
+            for(int i = 0; i < size; i++){
+                auto node = q.front();
+                q.pop();
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+                if(i == size-1) ans.push_back(node->val);
+            }
+            
         }
-        return finalAns;
+        return ans;
     }
 };

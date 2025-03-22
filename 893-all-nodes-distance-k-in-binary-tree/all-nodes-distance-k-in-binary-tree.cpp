@@ -9,66 +9,58 @@
  */
 class Solution {
 public:
-    void parent(TreeNode* root, TreeNode* target, int k, unordered_map<TreeNode*, TreeNode*>& mpp){
-      queue<TreeNode*> q;
-      q.push(root);
-      mpp[root] = nullptr;
-      while(!q.empty()){
-        int size = q.size();
-        TreeNode* temp = q.front();
-        q.pop();
-        // cout << temp->val;
-        if(temp->left){
-          q.push(temp->left);
-          mpp[temp->left] = temp;
-        } 
-        if(temp->right){
-          q.push(temp->right);
-          mpp[temp->right] = temp;
-        } 
-      }
-      return;
-    }
-    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-       queue<TreeNode*> q;
-        unordered_map<int,int> visited;
-        unordered_map<TreeNode*,TreeNode*> mpp;
-        vector<int> ans;
-
-        parent(root,target,k,mpp);
-        // for(auto it: mpp){
-        //   cout << it.first->val <<" " << it.second->val << endl;
-        // }
-
-        q.push(target);// starting node will be our given target just like in graphs
-        
-        while(k-- && !q.empty()) { // will continue till it has reached a distance of k or level k 
-            int size = q.size();
-
-            while(size--) {
-                TreeNode *Node = q.front();
+    void findPar(unordered_map<TreeNode*, TreeNode*>& parent, TreeNode* root){
+        parent[root] = nullptr;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int s = q.size();
+            for(int i = 0; i < s; i++){
+                auto node = q.front();
                 q.pop();
-                visited[Node->val] = 1;
-
-                if(Node->left && visited[Node->left->val] != 1 ) 
-                    q.push(Node->left);
-                   
-                if(Node->right && visited[Node->right->val] != 1 ) 
-                    q.push(Node->right);
-                  
-                if(mpp[Node]  && visited[mpp[Node]->val] != 1 ) 
-                    q.push(mpp[Node]);
-                
+                if(node->left) {
+                    q.push(node->left);
+                    parent[node->left] = node;
+                }
+                if(node->right) {
+                    q.push(node->right);
+                    parent[node->right] = node;
+                }
             }
         }
-      while(!q.empty()){
-          int temp = q.front()->val;
-          // cout << temp;
-          q.pop();
-          ans.push_back(temp);
-          
+    }
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        unordered_map<TreeNode*, TreeNode*> parent;
+        unordered_map<int, int> vis;
+        findPar(parent, root);
+        queue<TreeNode*> q;
+        q.push(target);
+        vis[target->val] = 1;
+        while(k-- && !q.empty()){
+            int s = q.size();
+            for(int i = 0; i < s; i++){
+                auto node = q.front();
+                q.pop();
+                if(node->left && vis[node->left->val]==0){ 
+                    q.push(node->left);
+                    vis[node->left->val] = 1;
+                }
+                if(node->right && vis[node->right->val]==0){ 
+                    q.push(node->right);
+                    vis[node->right->val] = 1;
+                }
+                if(parent[node] && vis[parent[node]->val]==0){ 
+                    q.push(parent[node]);
+                    vis[parent[node]->val] = 1;
+                }
+            }
         }
-        // cout << mpp[target];
-      return ans;
+        vector<int> ans;
+        while(!q.empty()){
+            int a = q.front()->val;
+            ans.push_back(a);
+            q.pop();
+        }
+        return ans;
     }
 };

@@ -16,7 +16,6 @@ public:
         return 1 + solve(root->left) + solve(root->right);
     }
     int countNodes(TreeNode* root) {
-        int count = 0;
         return solve(root);
     }
 };

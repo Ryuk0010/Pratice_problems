@@ -29,6 +29,5 @@ public:
         TreeNode *prev = nullptr;
         solve(root, first, end, prev);
         swap(first->val, end->val);
-        return;
     }
 };

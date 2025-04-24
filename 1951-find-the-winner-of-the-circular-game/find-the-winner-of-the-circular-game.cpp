@@ -1,8 +1,12 @@
 class Solution {
 public:
+    int solve(int n, int k){
+        if(n == 0) return 0;
+        int idx = solve(n-1, k);
+        idx+=k;
+        return idx % n;
+    }
     int findTheWinner(int n, int k) {
-        int win = 0;
-        for(int i = 2; i <= n; i++) win = (win + k) % i;
-        return win+1;
+        return solve(n, k)+1;
     }
 };

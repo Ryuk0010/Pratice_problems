@@ -20,7 +20,7 @@ public:
             int a = s[i-1] - '0';
             int b = stoi(s.substr(i-2, 2));
 
-            if(a != 0) dp[i] += dp[i-1];
+            if(a != 0) dp[i] = dp[i-1];
             if(b >= 10 && b <= 26) dp[i] += dp[i-2];
         }
         return dp[n];

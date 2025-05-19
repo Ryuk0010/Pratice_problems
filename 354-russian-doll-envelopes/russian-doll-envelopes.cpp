@@ -4,7 +4,7 @@ public:
         int n = envelopes.size();
         int ans = 0;
         auto cmp = [](vector<int>&a, vector<int>&b){
-            if(a[0] == b[0]) return b[1] < a[1];
+            if(a[0] == b[0]) return a[1] > b[1];
             return a[0] < b[0];
         };
         sort(envelopes.begin(), envelopes.end(), cmp);

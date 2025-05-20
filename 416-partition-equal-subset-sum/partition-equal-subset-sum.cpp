@@ -1,14 +1,12 @@
 class Solution {
 public:
     bool solve(vector<int>& nums, int i, int sum, int s2, vector<vector<int>> &dp){
-        // cout << i <<" " << s2 << endl;
         if(i == nums.size()) return false;
         if(sum - s2 == s2) return true;
         if(dp[i][s2] != -1) return dp[i][s2];
-        bool b = solve(nums, i+1, sum, s2, dp);
 
         bool a = solve(nums, i+1, sum, s2 + nums[i], dp);
-        
+        bool b = solve(nums, i+1, sum, s2, dp);
         return dp[i][s2] = a | b;
     }
     bool canPartition(vector<int>& nums) {

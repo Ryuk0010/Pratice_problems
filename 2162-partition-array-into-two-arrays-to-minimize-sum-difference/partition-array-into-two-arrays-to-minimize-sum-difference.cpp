@@ -37,7 +37,11 @@ public:
                 if(itr!=v.end()) res = min(res, abs(sum-2*(a+(*itr))));
                 if(itr!= v.begin()){
                     auto it = itr; --it;
-                    res = min(res, abs(sum-2*(a+(*it))));
+                    if(res < abs(sum-2*(a+(*it)))){
+                        continue;
+                    }
+                    else res = abs(sum-2*(a+(*it)));
+                    // res = min(res, abs(sum-2*(a+(*it))));
                 }                
             }
         }

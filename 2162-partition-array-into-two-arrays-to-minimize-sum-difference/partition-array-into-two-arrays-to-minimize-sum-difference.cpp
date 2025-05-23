@@ -1,36 +1,36 @@
 class Solution {
 public:
     int minimumDifference(vector<int>& nums) {
-        int n = nums.size(), res = 0, sum = 0;
+        int N = nums.size(), res = 0, sum = 0;
         sum = accumulate(nums.begin(), nums.end(),0);
         
-        int N = n/2;
-        vector<vector<int>> left(N+1), right(N+1);
+        int n = N/2;
+        vector<vector<int>> left(n+1), right(n+1);
         
 
-        for(int mask = 0; mask<(1<<N); ++mask){
+        for(int mask = 0; mask<(1<<n); ++mask){
             int sz = 0, l = 0, r = 0;
-            for(int i=0; i<N; ++i){
+            for(int i=0; i<n; ++i){
                 if(mask&(1<<i)){
                     sz++;
                     l += nums[i];
-                    r += nums[i+N];
+                    r += nums[i+n];
                 }
             }
             left[sz].push_back(l);
             right[sz].push_back(r);
         }
 
-        for(int sz=0; sz<=N; ++sz){
+        for(int sz=0; sz<=n; ++sz){
             sort(right[sz].begin(), right[sz].end());
         }
 
-        res = min(abs(sum-2*left[N][0]), abs(sum-2*right[N][0]));
+        res = INT_MAX;
 
 
-        for(int sz=1; sz<N; ++sz){
+        for(int sz=0; sz<n; ++sz){
             for(auto &a : left[sz]){
-                int b = (sum - 2*a)/2, rsz = N-sz;
+                int b = (sum - 2*a)/2, rsz = n-sz;
                 auto &v = right[rsz];
                 auto itr = lower_bound(v.begin(), v.end(),b);
                 

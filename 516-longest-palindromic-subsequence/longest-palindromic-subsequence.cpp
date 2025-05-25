@@ -1,15 +1,17 @@
 class Solution {
 public:
-    int memo[1000][1000] = {};
-    int longestPalindromeSubseq(const string& s) {
-        return dp(s, 0, s.size() - 1);
+int dp[1001][1001] = {0};
+    int solve(int i, int j, string &s){
+        if(i > j) return 0;
+        if(i == j) return 1;
+        if(dp[i][j] != 0) return dp[i][j];
+
+        if(s[i] == s[j]) return dp[i][j] =  2 + solve(i+1, j-1, s);
+        return dp[i][j] =  max(solve(i+1, j, s), solve(i, j-1, s));
+
     }
-    int dp(const string& s, int l, int r) {
-        if (l > r) return 0; 
-        if (l == r) return 1;
-        if (memo[l][r] != 0) return memo[l][r];
-        if (s[l] == s[r])
-            return memo[l][r] = dp(s, l+1, r-1) + 2;
-        return memo[l][r] = max(dp(s, l+1, r), dp(s, l, r-1));
+    int longestPalindromeSubseq(string s) {
+        
+        return solve(0, s.length()-1, s);
     }
 };

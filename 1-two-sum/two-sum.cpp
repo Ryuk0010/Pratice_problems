@@ -6,8 +6,11 @@ public:
         for(int i = 0; i < nums.size(); i++){
             if(mp.find(target - nums[i]) == mp.end())
                 mp[nums[i]] = i;
-            else
-                return {mp[target-nums[i]], i};
+            else{
+                int a = mp[target - nums[i]];
+                int b = i;
+                return {a, b};
+            }
         }
  
         return {-1, -1};

@@ -11,9 +11,9 @@ public:
                 st.pop();
                 if (st.empty()) break;
 
-                int distance = i - st.top() - 1;
-                int boundedHeight = min(height[i], height[st.top()]) - height[top];
-                water += distance * boundedHeight;
+                int dist = i - st.top() - 1;
+                int h = min(height[i], height[st.top()]) - height[top];
+                water += dist * h;
             }
             st.push(i);
         }

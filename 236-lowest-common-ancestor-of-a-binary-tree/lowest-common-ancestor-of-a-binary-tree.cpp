@@ -16,8 +16,9 @@ public:
         TreeNode* r = NULL;
         l = solve(root->left, p, q);
         r = solve(root->right, p, q);
-        if(l == NULL) return r;
         if(r == NULL) return l;
+        if(l == NULL) return r;
+        
         return root;
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {

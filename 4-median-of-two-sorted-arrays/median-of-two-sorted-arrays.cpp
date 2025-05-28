@@ -1,30 +1,64 @@
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int n = nums1.size();
-        int m = nums2.size();
-        int i = 0, j = 0, m1 = 0, m2 = 0;
-        for (int count = 0; count <= (n + m) / 2; count++) {
-            m2 = m1;
-            if (i != n && j != m) {
-                if (nums1[i] > nums2[j]) {
-                    m1 = nums2[j++];
-                } else {
-                    m1 = nums1[i++];
+        int m = nums1.size();
+        int n = nums2.size();
+        int size = m+n;
+        
+        int idx1 = (size/2)-1;
+        int element1 = -1;
+        int idx2 = size/2;
+        int element2 = -1;
+        
+        int i = 0, j = 0, k = 0;
+        
+        while(i < m && j < n) {
+            if(nums1[i] < nums2[j]) {
+                if(k == idx1) {
+                    element1 = nums1[i];
                 }
-            } else if (i < n) {
-                m1 = nums1[i++];
+                if(k == idx2) {
+                    element2 = nums1[i];
+                }
+                i++;
             } else {
-                m1 = nums2[j++];
+                if(k == idx1) {
+                    element1 = nums2[j];
+                }
+                if(k == idx2) {
+                    element2 = nums2[j];
+                }
+                j++;
             }
+            k++;
+        }
+        
+        while(i < m) {
+            if(k == idx1) {
+                element1 = nums1[i];
+            }
+            if(k == idx2) {
+                element2 = nums1[i];
+            }
+            i++;
+            k++;
+        }
+        
+        while(j < n) {
+            if(k == idx1) {
+                element1 = nums2[j];
+            }
+            if(k == idx2) {
+                element2 = nums2[j];
+            }
+            j++;
+            k++;
         }
 
-
-        if ((n + m) % 2) {
-            return static_cast<double>(m1);
-        } else {
-            double ans = static_cast<double>(m1) + static_cast<double>(m2);
-            return ans / 2.0;
-        }
+        if(size%2 == 1)
+            return element2;
+        
+        return (element1 + element2)/2.0;
+        
     }
 };

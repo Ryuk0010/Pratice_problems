@@ -14,33 +14,24 @@ public:
                 pq.push({count[ch-'a'], ch});
 
             }
-         }
-        
-        string ans = "";
-        
-        while(pq.size() >= 2) {
-            auto one = pq.top(); 
-            pq.pop();
-            
-            auto two = pq.top();
-            pq.pop();
-            
-            ans.push_back(one.second);
-            ans.push_back(two.second);
-            
-            one.first--;
-            two.first--;
-            
-            if(one.first > 0)
-                pq.push(one);
-            
-            if(two.first > 0)
-                pq.push(two);
         }
+
+        string ans = "";
+       while(pq.size() > 1){
+            auto ele1 = pq.top(); pq.pop();
+            ans += ele1.second;
         
-        if(!pq.empty())
-            ans.push_back(pq.top().second);
-        
+            auto ele2 = pq.top(); pq.pop();
+            ans += ele2.second;
+            
+            if(--ele2.first > 0) pq.push(ele2);
+            if(--ele1.first > 0) pq.push(ele1);
+        }
+
+        if(!pq.empty()) {
+            ans += pq.top().second;
+        }
+
         return ans;
     }
 };

@@ -11,8 +11,7 @@
  */
 class Solution {
 public:
-      int depth(int &maxdepth,TreeNode* root)
-    {
+    int depth(int &maxdepth,TreeNode* root){
         if(root==NULL)return 0;
         int lh=depth(maxdepth,root->left);
         int rh=depth(maxdepth,root->right);

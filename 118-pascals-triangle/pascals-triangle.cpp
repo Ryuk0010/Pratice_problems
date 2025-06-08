@@ -1,21 +1,16 @@
 class Solution {
 public:
-    int solve(int n, int r) {
-        int result = 1;
-        for (int i = 0; i < r; i++) {
-            result = result * (n - i) / (i + 1);
-        }
-        return result;
-    }
-
     vector<vector<int>> generate(int numRows) {
-        vector<vector<int>> pascalTriangle(numRows);
-
+        vector<vector<int>> ret;
         for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j <= i; j++) {
-                pascalTriangle[i].push_back(solve(i, j));
+            vector<int> row(i + 1, 1);
+            for (int j = 1; j < i; j++) {
+                row[j] = ret[i - 1][j] + ret[i - 1][j - 1];
             }
+            ret.push_back(row);
         }
-        return pascalTriangle;
+
+
+        return ret;
     }
 };

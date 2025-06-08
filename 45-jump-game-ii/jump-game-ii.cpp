@@ -9,7 +9,15 @@ public:
         return dp[pos];
     }
     int jump(vector<int>& nums) {
-        vector<int> dp(nums.size(), 10001);
-        return solve(nums, 0, dp);
+        int n = nums.size();
+        vector<int> dp(n, 10001);
+        // return solve(nums, 0, dp);
+        dp[n-1] = 0;
+        for(int i = n-2; i >= 0; i--){
+            for(int jump = 1; jump <= nums[i]; jump++){
+                dp[i] = min(dp[i], 1+dp[min(n-1, i+jump)]);
+            }
+        }
+        return dp[0];
     }
 };

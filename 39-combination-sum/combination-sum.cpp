@@ -7,10 +7,11 @@ public:
             return;
         }
         if (ind >= candidates.size()) return;
-        solve(candidates, target, ans, temp, ind+1);
+
         temp.push_back(candidates[ind]);
         solve(candidates, target - candidates[ind], ans, temp, ind);
         temp.pop_back();
+        solve(candidates, target, ans, temp, ind+1);
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ans;

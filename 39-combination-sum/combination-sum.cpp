@@ -10,7 +10,7 @@ public:
         solve(candidates, target, ans, temp, ind+1);
         temp.push_back(candidates[ind]);
         solve(candidates, target - candidates[ind], ans, temp, ind);
-        // temp.pop_back();
+        temp.pop_back();
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ans;

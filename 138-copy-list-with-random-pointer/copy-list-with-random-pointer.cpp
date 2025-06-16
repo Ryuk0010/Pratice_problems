@@ -37,9 +37,8 @@ public:
         curr = head;
         Node* newCurr = newHead;
         while(curr) {
-                newCurr->random = mpp[curr->random];    
-
-            
+            Node* randomNode = curr->random;
+            newCurr->random = mpp[randomNode];    
             newCurr = newCurr->next;
             curr = curr->next;
         }

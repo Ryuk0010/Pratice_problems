@@ -23,7 +23,7 @@ public:
         for(int i = 0; i < queries.size(); i++){
             int c1 = r[queries[i][0]];
             int c2 = l[queries[i][1]];
-            if(c1 != -1 && c2 != -1 && c1 < c2) ans.push_back(ps[c2]-ps[c1]);
+            if(c1 > -1 && c2 > -1 && c1 < c2) ans.push_back(ps[c2]-ps[c1]);
             else ans.push_back(0);
         }
         return ans;

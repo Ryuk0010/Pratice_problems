@@ -1,43 +1,38 @@
-using ll = long long;
-const int MOD = 1e9 + 7;
-
 class Solution {
 public:
-    int sumSubarrayMins(vector<int>& nums) {
-        int length = nums.size();
-        vector<int> left(length, -1);
-        vector<int> right(length, length);
-        stack<int> stk;
-
-        for (int i = 0; i < length; ++i) {
-            while (!stk.empty() && nums[stk.top()] >= nums[i]) {
-                stk.pop();
+    const int MOD = 1e9 + 7;
+    int sumSubarrayMins(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> left(n, 0), right(n, 0);
+        stack<pair<int, int>> st;
+        for(int i = 0; i < n; i++){
+            int cnt = 1;
+            while(!st.empty() && st.top().first > arr[i]){
+                cnt += st.top().second;
+                st.pop();
             }
-            if (!stk.empty()) {
-                left[i] = stk.top();
-            }
-            stk.push(i);
+            st.push({arr[i], cnt});
+            left[i] = cnt;
         }
-
-        stk = stack<int>();
-
-        for (int i = length - 1; i >= 0; --i) {
-            while (!stk.empty() && nums[stk.top()] > nums[i]) {
-                stk.pop();
+        st = stack<pair<int, int>>();
+        for(int i = n-1; i >= 0; i--){
+            int cnt = 1;
+            while(!st.empty() && st.top().first >= arr[i]){
+                cnt += st.top().second;
+                st.pop();
             }
-            if (!stk.empty()) {
-                right[i] = stk.top();
-            }
-            stk.push(i);
+            st.push({arr[i], cnt});
+            right[i] = cnt;
         }
+        long long ans = 0;
+        for(int i = 0; i < n; i++){
+            long long l = left[i] % MOD;
+            long long r = right[i] % MOD;
+            long long prod = (l * r) % MOD;
+            prod = (prod * arr[i]) % MOD;
+            ans = (ans + prod) % MOD;
 
-        ll sum = 0;
-
-        for (int i = 0; i < length; ++i) {
-            sum += static_cast<ll>(i - left[i]) * (right[i] - i) * nums[i] % MOD;
-            sum %= MOD;
         }
-
-        return sum;
+        return (int)ans;
     }
 };

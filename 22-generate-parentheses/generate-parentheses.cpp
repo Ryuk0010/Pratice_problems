@@ -15,16 +15,16 @@ public:
             seq1.push_back(')');
             solve(m, n-1, seq1, ans);
         }
-        else if(n == 0){
-            string seq1 = seq;
-            seq1.push_back('(');
-            solve(m-1, n, seq1, ans);
-        }
+        // else if(n == 0){
+        //     string seq1 = seq;
+        //     seq1.push_back('(');
+        //     solve(m-1, n, seq1, ans);
+        // }
         else{
             string seq1 = seq;
             string seq2 = seq;
-            seq1 += '(';
-            seq2 += ')';
+            seq1.push_back('(');
+            seq2.push_back(')');
             solve(m-1, n, seq1, ans);
             solve(m, n-1, seq2, ans);
         }

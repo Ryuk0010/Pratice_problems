@@ -1,9 +1,9 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        set<int> st;
+        set<int> st(nums.begin(), nums.end());
         int n = nums.size();
-        for(auto& it: nums) st.insert(it);
+        
         int ans = 0;
         int prev = *st.begin();
         int count = 0;

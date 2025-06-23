@@ -4,7 +4,7 @@ public:
         unordered_map<int, int> mpp1;
         unordered_map<int, int> mpp2;
         vector<int> ans;
-        for(auto it: queries){
+        for(auto& it: queries){
             int b = it[0];
             int c = it[1];
             if(mpp1.count(b)){

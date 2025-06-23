@@ -15,16 +15,15 @@ public:
             int node=q.top().second.first;
             int cost=q.top().second.second;
             q.pop();
-
             if(stop > k){
                continue; 
             }
 
             for(auto it: adj[node]){
              
-              if(stop <= k && cost + it.second < price[it.first]){
-                 price[it.first] = cost + it.second;
-                  q.push({stop + 1, {it.first, cost + it.second}});
+              if(cost + it.second < price[it.first]){
+                    price[it.first] = cost + it.second;
+                    q.push({stop + 1, {it.first, cost + it.second}});
               }
             }
         }

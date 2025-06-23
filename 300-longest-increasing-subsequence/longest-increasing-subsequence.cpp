@@ -8,6 +8,7 @@ public:
             if(nums[i] > temp.back()) temp.push_back(nums[i]);
             else{
                 int idx = lower_bound(temp.begin(), temp.end(), nums[i]) - temp.begin();
+                cout << idx <<" ";
                 temp[idx] = nums[i];
             }
         }

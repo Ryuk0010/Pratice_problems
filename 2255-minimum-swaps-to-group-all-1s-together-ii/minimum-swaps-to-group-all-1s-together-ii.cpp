@@ -10,6 +10,6 @@ public:
             cnt -= nums[i];
             cnt += nums[(i+k) % n];
         }
-        return k - total;
+        return k-total;
     }
 };

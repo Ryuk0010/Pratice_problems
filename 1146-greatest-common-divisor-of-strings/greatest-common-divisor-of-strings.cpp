@@ -12,7 +12,7 @@ public:
             return l1;
         };
 
-        int ans = gcd(max(str1.length(), str2.length()), min(str1.length(), str2.length()));
+        int ans = gcd(str1.length(), str2.length());
         return str1.substr(0, ans);
     }
 };

@@ -6,7 +6,7 @@ public:
             int mid = l + (r - l)/2;
             if(nums[mid] == target) return mid;
             if(nums[l] <= nums[mid]){
-                if(target < nums[mid] && nums[l] <= target) r = mid - 1;
+                if(target <= nums[mid] && nums[l] <= target) r = mid;
                 else l = mid + 1;
             }
             else{

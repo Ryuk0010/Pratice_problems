@@ -10,7 +10,7 @@
  */
 class Solution {
 public:
-    ListNode* merge(ListNode* n1, ListNode* n2){
+    ListNode* merge(ListNode * n1, ListNode* n2){
         if(!n1) return n2;
         if(!n2) return n1;
 
@@ -22,15 +22,15 @@ public:
             n2->next = merge(n1, n2->next);
             return n2;
         }
-
     }
+
     ListNode* mergeSort(vector<ListNode*>& lists, int low, int high){
         if(low >= high) return lists[low];
 
         int mid = (low+high)/2;
-        ListNode* node1 = mergeSort(lists, low, mid);
-        ListNode* node2 = mergeSort(lists, mid+1, high);
-        return merge(node1, node2);
+        ListNode* n1 = mergeSort(lists, low, mid);
+        ListNode* n2 = mergeSort(lists, mid+1, high);
+        return merge(n1, n2);
     }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if(lists.size() == 0) return nullptr;

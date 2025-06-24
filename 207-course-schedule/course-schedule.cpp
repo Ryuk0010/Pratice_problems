@@ -17,11 +17,11 @@ public:
           }
         }
 
-        int topo=0;
+        vector<int> topo;
         while (!q.empty()){
           int node = q.front();
           q.pop();
-          topo++;
+          topo.push_back(node);
           for (int adjNode : adj[node]){
             indegree[adjNode]--;
             if (indegree[adjNode] == 0){
@@ -29,7 +29,7 @@ public:
             }
           }
         }
-        if (topo == numCourses){
+        if (topo.size() == numCourses){
           return true;
         }
         return false;

@@ -11,34 +11,30 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root, vector<vector<int>>& ans){
-      queue<pair<TreeNode*, int>> q;
-      q.push({root, 1});
-      while(!q.empty()){
-        int size = q.size();
-        vector<int> temp(size, 0);
-        int line = q.front().second;
-        for(int i=0; i<size; i++){
-
-          TreeNode *node = q.front().first;
-          q.pop();
-          if(line%2 != 0){
-            temp[i] = node->val;
-          }
-          else{
-            temp[size - i - 1] = node->val;
-          }
-          if(node->left)q.push({node->left, line+1});
-            if(node->right)q.push({node->right, line+1});
-        }
-        ans.push_back(temp);
-      }
-    }
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-
-      vector<vector<int>> ans;
-      if(!root) return ans;
-      solve(root, ans);
-      return ans;
+        if(root == nullptr) return {};
+        queue<pair<TreeNode*, int>> q;
+        vector<vector<int>> ans;
+        q.push({root, 1});
+        while(!q.empty()){
+            int s = q.size();
+            vector<int> temp;
+            TreeNode* node;
+            int lvl;
+            for(int i = 0; i < s; i++){
+                node = q.front().first;
+                lvl = q.front().second;
+                q.pop();
+                if(node->left) q.push({node->left, lvl+1});
+                if(node->right) q.push({node->right, lvl+1});
+                temp.push_back(node->val);
+            }
+            if(lvl % 2 == 0){
+                reverse(temp.begin(), temp.end());
+                ans.push_back(temp);
+            } 
+            else ans.push_back(temp);
+        }
+        return ans;
     }
 };

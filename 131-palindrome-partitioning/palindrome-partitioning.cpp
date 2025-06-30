@@ -7,7 +7,7 @@ public:
         return true;
     }
 
-    void solve(string s,int ind,vector<string> output,vector<vector<string>>&ans){
+    void solve(string s,int ind,vector<string>& output,vector<vector<string>>& ans){
         if(ind==s.length()){
             ans.push_back(output);
             return;

@@ -31,7 +31,7 @@ public:
         }
     }
 
-    int solve(vector<vector<int>>& minDist, int idx, int mask, int n, bool Alice,int dp[51][1 << 15]) {
+    int solve(vector<vector<int>>& minDist, int idx, int mask, int n, bool Alice, int dp[51][1 << 15]) {
         if(mask == 0) {
             return 0; 
         }
@@ -44,7 +44,7 @@ public:
                 int moves = minDist[idx][i];
 
                 if(Alice == true) {
-                    result = max(result, moves + solve(minDist, i, mask ^ (1 << (i-1)), n, !Alice ,dp));
+                    result = max(result, moves + solve(minDist, i, mask ^ (1 << (i-1)), n, !Alice, dp));
                 } else {
                     result = min(result, moves + solve(minDist, i, mask ^ (1 << (i-1)), n, !Alice, dp));
                 }
@@ -72,7 +72,6 @@ public:
             BFS(x, y, i, minDist, pos);
         }
 
-
         
         bool Alice = true;
         int dp[51][1 << 15];
@@ -80,3 +79,4 @@ public:
         return solve(minDist, 0, (1<<n)-1, pos.size(), Alice, dp);
     }
 };
+

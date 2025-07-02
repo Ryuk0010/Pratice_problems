@@ -10,9 +10,7 @@ public:
             pre[i] = max(pre[i-1],arr[i]);
             suf[n-i-1] = min(suf[n-i],arr[n-i-1]);
         }
-        // for(int i=n-2;i>=0;i--){
-        //     suf[i] = min(suf[i+1],arr[i]);
-        // }
+
         int count = 0;
         for(int i=0;i<n-1;i++){
             if(pre[i]<=suf[i+1]) count++;

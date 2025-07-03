@@ -16,7 +16,7 @@ public:
                     stack.push(a);
                 }
 
-                if (!stack.empty() && stack.top() == -a) {
+                if (!stack.empty() && stack.top() > 0 && stack.top() == -a) {
                     stack.pop();
                 }
             }

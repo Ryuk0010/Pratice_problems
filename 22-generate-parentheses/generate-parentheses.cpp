@@ -1,38 +1,27 @@
 class Solution {
 public:
-    void solve(int m, int n, string seq, vector<string>& ans){
-        if(m == 0 && n == 0){
-           ans.push_back(seq); 
-           return;
-        } 
-        if(m == n){
-            string seq1 = seq;
-            seq1.push_back('(');
-            solve(m-1, n, seq1, ans);
+    void solve(int n, int m, string seq, vector<string>& ans){
+        if(m == 0 && n == 0) ans.push_back(seq);
+        else if(m == n){
+            seq.push_back('(');
+            solve(n-1, m, seq, ans);
         }
-        else if(m == 0){
-            string seq1 = seq;
-            seq1.push_back(')');
-            solve(m, n-1, seq1, ans);
+        else if(n == 0){
+            seq.push_back(')');
+            solve(n, m-1, seq, ans);
         }
-        // else if(n == 0){
-        //     string seq1 = seq;
-        //     seq1.push_back('(');
-        //     solve(m-1, n, seq1, ans);
-        // }
         else{
-            string seq1 = seq;
-            string seq2 = seq;
-            seq1.push_back('(');
-            seq2.push_back(')');
-            solve(m-1, n, seq1, ans);
-            solve(m, n-1, seq2, ans);
+            seq.push_back('(');
+            solve(n-1, m, seq, ans);
+            seq.pop_back();
+            seq.push_back(')');
+            solve(n, m-1, seq, ans);
         }
+
     }
     vector<string> generateParenthesis(int n) {
         vector<string> ans;
-        string seq = "";
-        solve(n, n, seq, ans);
+        solve(n, n, "", ans);
         return ans;
     }
 };

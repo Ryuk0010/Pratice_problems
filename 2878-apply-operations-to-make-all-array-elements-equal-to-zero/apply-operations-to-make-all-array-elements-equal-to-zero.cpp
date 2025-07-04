@@ -8,8 +8,8 @@ public:
             carry += ans[i];
             nums[i] += carry;
 
-            if(nums[i] == 0) continue;
-            if(nums[i] < 0) return false;
+            
+            if(nums[i] < 0) return false;if(nums[i] == 0) continue;
             if(i+k > n) return false;
 
             carry -= nums[i];

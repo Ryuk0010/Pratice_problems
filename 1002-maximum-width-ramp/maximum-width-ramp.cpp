@@ -2,19 +2,22 @@ class Solution {
 public:
     int maxWidthRamp(vector<int>& nums) {
         int n = nums.size();
-        stack<int> st;
-        int ans = 0;
-        int i = 0;
-        for(int i = 0; i < n; i++){
-            if(st.empty() || nums[st.top()] > nums[i]) st.push(i);
+        vector<int> smallFromLeft(n, 0);
+        int ans = -1;
+        smallFromLeft[0] = 0;
+        for(int i = 1; i < n; i++) {
+            if(nums[i] < nums[smallFromLeft[i-1]]) smallFromLeft[i] = i;
+            else smallFromLeft[i] = smallFromLeft[i-1];
         }
-        for(int i = n-1; i >= 0; i--){
-            while(!st.empty() && nums[st.top()] <= nums[i]){
-                ans = max(ans, i - st.top());
-                st.pop();
+        int i = n-1;
+        for(int j = n-1; j >= 0; j--) {
+            while(i >= 0 && nums[smallFromLeft[i]] <= nums[j]){
+                ans = max(ans, j - smallFromLeft[i]);
+                i--;
             }
             
         }
+        // for(int j = 0; j < n; j++) cout<<smallFromLeft[j]<<" ";
         return ans;
     }
 };

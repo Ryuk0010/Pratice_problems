@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[1001][1001];
+    int dp[1000][1000];
     bool solve(int i, int j, string& s){
         if(i >= j) return 1;
         if(dp[i][j] != -1) return dp[i][j];

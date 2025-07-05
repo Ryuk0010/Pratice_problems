@@ -10,7 +10,7 @@ public:
     string longestPalindrome(string s) {
         memset(dp, -1, sizeof(dp));
         int n = s.length();
-        int len = -1;
+        int len = 0;
         int a = 0;
         for(int i = 0; i < n; i++){
             for(int j = i; j < n; j++){

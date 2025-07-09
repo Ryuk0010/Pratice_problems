@@ -4,9 +4,9 @@ public:
     int n = board.size();
     vector<int> nb(n * n);
     int index = 0;
-    bool leftToRight = true;
+    bool t = true;
     for (int i = n - 1; i >= 0; i--) {
-        if (leftToRight) {
+        if (t) {
             for (int j = 0; j < n; j++) {
                 nb[index++] = board[i][j];
             }
@@ -15,7 +15,7 @@ public:
                 nb[index++] = board[i][j];
             }
         }
-        leftToRight = !leftToRight;
+        t = !t;
     }
     vector<int> dist(n * n, -1);
     queue<int> q;

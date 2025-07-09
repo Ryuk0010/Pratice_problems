@@ -2,17 +2,17 @@ class Solution {
 public:
     int snakesAndLadders(vector<vector<int>>& board) {
     int n = board.size();
-    vector<int> flattenedBoard(n * n);
+    vector<int> nb(n * n);
     int index = 0;
     bool leftToRight = true;
     for (int i = n - 1; i >= 0; i--) {
         if (leftToRight) {
             for (int j = 0; j < n; j++) {
-                flattenedBoard[index++] = board[i][j];
+                nb[index++] = board[i][j];
             }
         } else {
             for (int j = n - 1; j >= 0; j--) {
-                flattenedBoard[index++] = board[i][j];
+                nb[index++] = board[i][j];
             }
         }
         leftToRight = !leftToRight;
@@ -32,8 +32,8 @@ public:
             if (next >= n * n) {
                 continue;
             }
-            if (flattenedBoard[next] != -1) {
-                next = flattenedBoard[next] - 1;
+            if (nb[next] != -1) {
+                next = nb[next] - 1;
             }
             if (dist[next] == -1) {
                 dist[next] = dist[curr] + 1;

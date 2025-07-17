@@ -21,7 +21,6 @@ public:
     int diameterOfBinaryTree(TreeNode* root) {
         int ans = 0;
         int maxi = depth(ans, root);
-        cout << maxi;
         return ans;
     }
 };

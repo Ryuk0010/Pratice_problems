@@ -1,27 +1,26 @@
 class Solution {
 public:
+    vector<string> ans;
     unordered_set<string> st;
     unordered_map<string, bool> dp;
-    bool solve(string& w) {
+    bool solve(string& s){
 
-        if(dp.find(w) != dp.end()) return dp[w];
+        if(dp.find(s) != dp.end()) return dp[s];
+        for(int i = 1; i < s.length(); i++){
+            string pre = s.substr(0, i);
+            string suf = s.substr(i);
 
-
-        for(int i = 1; i < w.length(); i++) {
-            string pre = w.substr(0, i);
-            string suf = w.substr(i);
-            if(st.count(pre) && (st.count(suf) || solve(suf))) return dp[w] = true;
+            if(st.count(pre) && (st.count(suf) || solve(suf))) return dp[s] = true;
+            
         }
-        return dp[w] = false;
+        return dp[s] = false;
     }
-
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
-        vector<string> res;
-
-        for(auto w : words) st.insert(w);
-        for(auto w : words) {
-            if(solve(w)) res.push_back(w);
+        
+        for(auto it: words) st.insert(it);
+        for(auto it: words){ 
+            if(solve(it)) ans.push_back(it);
         }
-        return res;
+        return ans;
     }
 };

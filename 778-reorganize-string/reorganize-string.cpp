@@ -2,7 +2,7 @@ class Solution {
 public:
     string reorganizeString(string s) {
         int n = s.length();
-        priority_queue<pair<int, char>, vector<pair<int, char>>> pq;
+        priority_queue<pair<int, char>> pq;
         vector<int> count(26, 0);
         for(char &ch : s) {
             count[ch-'a']++;

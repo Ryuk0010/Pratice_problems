@@ -1,8 +1,8 @@
 class Solution {
 public:
-    bool checkpalindrome(string s,int st,int e){
-        while(st<=e){
-            if(s[st++]!=s[e--]) return false;
+    bool checkpalindrome(string s,int l,int h){
+        while(l<=h){
+            if(s[l++]!=s[h--]) return false;
         }
         return true;
     }

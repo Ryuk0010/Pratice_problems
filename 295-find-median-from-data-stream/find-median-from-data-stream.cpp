@@ -17,7 +17,7 @@ public:
     }
     
     double findMedian() {
-        int sz = minHeap.size()+maxHeap.size();
+        int sz = minHeap.size() + maxHeap.size();
         if(sz%2) return (double)maxHeap.top();
         else return (double)(maxHeap.top()+minHeap.top()) / 2;
     }

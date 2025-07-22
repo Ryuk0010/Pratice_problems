@@ -2,7 +2,7 @@ class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
         auto itr = remove_if(nums.begin(), nums.end(), [](auto x){
-            return x < 0;
+            return x <= 0;
         });
         nums.erase(itr, nums.end());
 

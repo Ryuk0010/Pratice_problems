@@ -2,9 +2,11 @@ class Solution {
 public:
     int characterReplacement(string s, int k) {
         unordered_map<char, int> mpp;
-        int ans = 0, i = 0;
+        int n = s.length();
+        int ans = 0;
+        int i = 0;
         int freq = 0;
-        for(int j = 0; j < s.size(); j++){
+        for(int j = 0; j < n; j++){
             mpp[s[j]]++;
             freq = max(freq, mpp[s[j]]);
             while((j-i+1) - freq > k){

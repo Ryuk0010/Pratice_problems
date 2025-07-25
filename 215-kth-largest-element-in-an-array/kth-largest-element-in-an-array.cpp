@@ -1,27 +1,28 @@
 class Solution {
 public:
-    int solve(vector<int>& nums, int left, int right, int k){
-        if(left == right) return nums[left];
-
-        int s = left;
-        int e = right;
-        int p = nums[left];
-
-        while(s <= e){
-            while(s <= e && nums[s] < p) s++;
-            while(s <= e && nums[e] > p) e--;
-            if(s <= e){
-                swap(nums[s], nums[e]);
-                s++;
-                e--;
-            }
-        }
-        if(e >= k) return solve(nums, left, e, k);
-        else if(s <= k) return solve(nums, s, right, k);
-        else return nums[k];
-    }
     int findKthLargest(vector<int>& nums, int k) {
-        k = nums.size() - k;
-        return solve(nums, 0, nums.size()-1, k);
+        map<int, int> mpp;
+        k = nums.size() - k + 1;
+        for(int i = 0; i < nums.size(); i++){
+            mpp[nums[i]]++;
+        }
+        int freq = 0;
+        for(auto it: mpp){
+            freq = it.second;
+            while(freq){
+                freq--;
+                k--;
+                if(k == 0) return it.first;
+            }
+            
+        }
+        return 0;
     }
 };
+// 1 - 1
+// 2 - 2
+// 3 - 2
+// 4 - 1
+// 5 - 2
+// 6 - 1
+

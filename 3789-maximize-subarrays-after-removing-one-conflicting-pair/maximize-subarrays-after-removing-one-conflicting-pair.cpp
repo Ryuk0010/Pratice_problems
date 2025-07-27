@@ -18,7 +18,7 @@ public:
                     secGtr = gtr;
                     gtr = arr[j];
                 }
-                else if(arr[j] > secGtr){
+                else if(arr[j] >= secGtr){
                     secGtr = arr[j];
                 }
             }

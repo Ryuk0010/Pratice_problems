@@ -14,7 +14,7 @@ public:
         for(int i = 1; i <= n; i++){
             auto& arr = pairs[i];
             for(int j = 0; j < arr.size(); j++){
-                if(arr[j] > gtr){
+                if(arr[j] >= gtr){
                     secGtr = gtr;
                     gtr = arr[j];
                 }

@@ -7,9 +7,10 @@ int dp1[2000][2000];
 
         if(dp1[i][j] != -1)
             return dp1[i][j];
-            if(s[i] == s[j]) dp1[i][j] = isPal(s, i+1, j-1);
-            else return false;
+        if(s[i] != s[j]) dp1[i][j] = 0;
+        if(s[i] == s[j]) dp1[i][j] = isPal(s, i+1, j-1);
         return dp1[i][j];
+
     }
     int minCutHelp(string &s, int i) {
         if(i == s.length() - 1) 
@@ -17,17 +18,16 @@ int dp1[2000][2000];
         if(dp2[i] != -1)
             return dp2[i];
         
-        dp2[i] = INT_MAX;
 
-        if(isPal(s, i, s.length() - 1))
-            return dp2[i] = 0;
 
+        if(isPal(s, i, s.length() - 1)) return 0;
+        int cnt = INT_MAX;
         for(int k = i; k < s.length(); ++k) {
             if(!isPal(s, i, k))
                 continue;
-            dp2[i] = min(dp2[i], 1 + minCutHelp(s, k+1));
+            cnt = min(cnt, 1 + minCutHelp(s, k+1));
         }
-        return dp2[i];
+        return dp2[i] = cnt;
     }
 public:
     int minCut(string s) {

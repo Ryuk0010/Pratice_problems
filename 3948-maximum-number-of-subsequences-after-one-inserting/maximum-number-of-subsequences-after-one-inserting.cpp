@@ -13,7 +13,6 @@ public:
             if(s[i] == 'T') suff_t[i]++;
         }
         ll ans = 0, best = 0, ansl = 0, anst = 0;
-        ll res = 0;
         for(int i = 0; i < n; i++) {
             ll p = pref_l[i];
             ll sf = suff_t[i];
@@ -24,8 +23,7 @@ public:
             if(s[i] == 'C') anst += p*(sf+1);
 
             best = max(best, p*sf);
-            res = max({res, ans+best, ansl, anst});
         }
-        return res;
+        return max({ans+best, ansl, anst});
     }
 };

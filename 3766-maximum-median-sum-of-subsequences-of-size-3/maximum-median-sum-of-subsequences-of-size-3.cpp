@@ -1,8 +1,7 @@
-typedef long long ll;
 class Solution {
 public:
     long long maximumMedianSum(vector<int>& nums) {
-        ll ans = 0;
+        long long ans = 0;
         sort(nums.begin(), nums.end());
         int n = nums.size();
         for (int i = 0; i < n / 3; i++) {

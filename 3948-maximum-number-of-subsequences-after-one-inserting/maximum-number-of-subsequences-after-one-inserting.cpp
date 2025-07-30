@@ -12,7 +12,6 @@ public:
             if(i+1 < n) suff_t[i] += suff_t[i+1];
             if(s[i] == 'T') suff_t[i]++;
         }
-
         ll ans = 0, best = 0, ansl = 0, anst = 0;
         for(int i = 0; i < n; i++) {
             ll p = pref_l[i];

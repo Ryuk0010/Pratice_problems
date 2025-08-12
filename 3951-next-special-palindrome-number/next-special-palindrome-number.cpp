@@ -26,7 +26,10 @@ public:
                         s[j] = ('0' + v[i]);
                     }
                     ll val = stoll(s);
-                    if(val > n) {ans = min(val, ans); break;}
+                    if(val > n) {
+                        ans = min(val, ans); 
+                        // break;
+                    }
                 }
                 while(next_permutation(v.begin(), v.end()));
 

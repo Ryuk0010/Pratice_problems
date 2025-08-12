@@ -28,7 +28,7 @@ public:
                     ll val = stoll(s);
                     if(val > n) {
                         ans = min(val, ans); 
-                        // break;
+                        break;
                     }
                 }
                 while(next_permutation(v.begin(), v.end()));

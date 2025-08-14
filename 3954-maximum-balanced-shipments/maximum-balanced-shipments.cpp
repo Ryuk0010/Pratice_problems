@@ -8,9 +8,7 @@ public:
                 cnt++;
                 maxi = 0;
             }
-            else{
-                maxi = max(maxi, weight[i]);
-            }
+            else maxi = max(maxi, weight[i]);
         }
         return cnt;
     }

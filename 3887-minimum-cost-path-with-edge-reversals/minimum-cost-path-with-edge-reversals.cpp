@@ -19,7 +19,6 @@ public:
         while (!q.empty()) {
             auto [distance, from] = q.top();
             q.pop();
-            if (distance > d[from]) continue;
             
             for (auto [to, cost] : graph[from]) {
                 if (d[to] > d[from] + cost) {

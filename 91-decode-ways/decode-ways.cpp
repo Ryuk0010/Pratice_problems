@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[101];
+    int dp[100];
     int solve(string s, int i, int n){
         if(i == n) return 1;
         if(s[i] == '0') return 0;

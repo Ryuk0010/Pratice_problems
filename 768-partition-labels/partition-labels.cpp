@@ -12,7 +12,6 @@ public:
 
         for (int i = 0; i < s.size(); i++) {
             maxLast = max(maxLast, last[s[i] - 'a']);
-            cout << i <<" -> " << maxLast<<endl;
 
             if (i == maxLast) {
                 result.push_back(i - prevEnd);

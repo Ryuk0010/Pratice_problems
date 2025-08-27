@@ -1,33 +1,23 @@
 class Solution {
+    using ll = long long;
 public:
-    long long minArraySum(vector<int>& nums, int k) {
+    ll minArraySum(vector<int>& nums, int k) {
         int n = nums.size();
-        long long total = 0;
-        for (int num : nums) total += num;
 
-        vector<long long> dp(n + 1, 0);
-        unordered_map<int, long long> best;
-        best[0] = 0;
-
-        long long prefix = 0;
-        for (int i = 1; i <= n; i++) {
-            prefix += nums[i - 1];
-            int rem = prefix % k;
-
-            dp[i] = dp[i - 1];
-
-            if (best.count(rem)) {
-                long long candidate = best[rem] + prefix;
-                dp[i] = max(dp[i], candidate);
+        vector<ll> best(k, -LLONG_MAX); best[0] = 0;
+        vector<ll> dp(n, 0), pref(n, 0);
+        for(int i = 0; i < n; i++) {
+            pref[i] += nums[i];
+            if(i) dp[i] = dp[i-1], pref[i] += pref[i-1];
+            
+            if(best[pref[i] % k] != -LLONG_MAX) {
+                dp[i] = max(dp[i], pref[i] + best[pref[i] % k]);
             }
-
-            long long val = dp[i] - prefix;
-            if (best.count(rem))
-                best[rem] = max(best[rem], val);
-            else
-                best[rem] = val;
+            best[pref[i] % k] = max(best[pref[i] % k], dp[i] - pref[i]);
         }
 
-        return total - dp[n];
+        ll tot = 0;
+        for(auto &x : nums) tot += x;
+        return tot - dp[n-1];
     }
 };

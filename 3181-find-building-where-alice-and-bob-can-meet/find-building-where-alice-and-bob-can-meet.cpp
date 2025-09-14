@@ -40,10 +40,6 @@ public:
         return (heights[leftIndex] >= heights[rightIndex]) ? leftIndex : rightIndex;
     }
 
-    // int RMIQ(int st[], vector<int>& heights, int n, int a, int b) {
-    //     return querySegmentTree(a, b, 0, 0, n - 1, st, heights);
-    // }
-
     vector<int> leftmostBuildingQueries(vector<int>& heights, vector<vector<int>>& queries) {
         int n = heights.size();
         int* segmentTree = constructST(heights, n);

@@ -1,23 +1,19 @@
 class Solution {
 public:
-    int findMaxForm(vector<string>& strs, int m, int n) {
-        vector<vector<vector<int>>> memo(strs.size(), vector<vector<int>>(m + 1, vector<int>(n + 1, -1)));
-        return dp(strs, m, n, 0, memo); 
+    vector<vector<vector<int>>> dp;
+    int fun(int i, int m, int n, vector<pair<int, int>>& v){
+        if(i<0) return 0;
+        if(dp[i][m][n]!=-1) return dp[i][m][n];
+        if(m>=v[i].first && n>=v[i].second) return dp[i][m][n] = max(1+fun(i-1, m-v[i].first, n-v[i].second, v), fun(i-1, m, n, v));
+        return dp[i][m][n] = fun(i-1, m, n, v);
     }
-
-private:
-    int dp(vector<string>& strs, int m, int n, int i, vector<vector<vector<int>>>& memo) {
-        if (m == 0 && n == 0) return 0;
-        if (i == strs.size()) return 0;
-        if (memo[i][m][n] != -1) return memo[i][m][n];
-
-        int ones = count(strs[i].begin(), strs[i].end(), '1');
-        int zeros = strs[i].size() - ones;
-        int take = 0;
-        if (m >= zeros && n >= ones)
-            take = 1 + dp(strs, m - zeros, n - ones, i + 1, memo);
-        int dontTake = dp(strs, m, n, i + 1, memo);
-
-        return memo[i][m][n] = max(take, dontTake);
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        dp.resize(strs.size()+1, vector<vector<int>>(m+1, vector<int>(n+1, -1)));
+        vector<pair<int, int>> v;
+        for(string x : strs){
+            int cnt = count(x.begin(), x.end(), '0');
+            v.push_back({cnt, x.size()-cnt});
+        }
+        return fun(strs.size()-1, m, n, v);
     }
 };

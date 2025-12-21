@@ -8,9 +8,7 @@ public:
         for(int i = 0; i < n; i++){
             c[s[i] - 'a'] += cost[i];
             tc += cost[i];
-        }
-        for(auto it: c){
-            mc = max(mc, it);
+            mc = max(c[s[i] - 'a'], mc);
         }
         return tc - mc;
     }

@@ -10,7 +10,7 @@ class Solution {
             }
         }
         for(int i = 1; i < arr1.length; i++){
-            if(Math.abs(arr1[i-1] - arr1[i]) <= minDiff){
+            if(Math.abs(arr1[i-1] - arr1[i]) == minDiff){
                 ans.add(Arrays.asList(arr1[i-1], arr1[i]));
             }
         }

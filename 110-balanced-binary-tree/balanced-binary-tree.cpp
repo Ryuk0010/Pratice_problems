@@ -13,18 +13,18 @@ class Solution {
 public:
 
     bool ans;
+    int check(TreeNode *node){
+        if(!node) return 0;
+        int l = check(node->left);
+        int r = check(node->right);
 
-    int getHt(TreeNode* root){
-        if(!root) return 0;
-        int lst = getHt(root->left);
-        int rst = getHt(root->right);
-        if(abs(lst-rst) > 1) ans = false;
-        return 1 + max(lst, rst);
+        if(abs(l-r) > 1) ans = false;
+        return 1 + max(l, r);
 
     }
     bool isBalanced(TreeNode* root) {
         ans = true;
-        getHt(root);
+        check(root);
         return ans;
     }
 };

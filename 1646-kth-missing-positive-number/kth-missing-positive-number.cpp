@@ -6,9 +6,9 @@ public:
             if(num <= ans) 
                 count++;
             else 
-                break; // array is sorted
+                break;
         }
-        return ans - count >= k;
+        return ans - count < k;
     }
 
     int findKthPositive(vector<int>& arr, int k) {
@@ -22,11 +22,11 @@ public:
             int mid = l + (r - l) / 2;
 
             if(isAns(arr, k, mid)){
-                ans = mid;
-                r = mid - 1;
+                l = mid + 1;
             }
             else{
-                l = mid + 1;
+                ans = mid;
+                r = mid - 1;
             }
         }
 

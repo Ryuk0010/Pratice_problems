@@ -5,11 +5,11 @@ public:
         int n = matrix[0].size();
         int cnt = 0;
         for(int i = 0; i < n; i++){
+            cnt = 0;
             for(int j = 0; j < n; j++){
                 if(matrix[i][j]) cnt++;
             }
             ans.push_back(cnt);
-            cnt = 0;
         }
         return ans;
     }

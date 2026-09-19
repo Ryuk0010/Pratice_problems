@@ -1,5 +1,5 @@
-int spf[1000001];
-int N=1000000;
+int spf[100001];
+int N=100000;
 void createspf()
 {
     for(int i=1;i<=N;++i)
